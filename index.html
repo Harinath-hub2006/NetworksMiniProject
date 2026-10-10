@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Real-Time Whiteboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+<!-- Network Status Banner -->
+<div id="status-banner" class="status-disconnected">Connecting to Server...</div>
+
+<!-- Room Login Modal -->
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <h2>Join Whiteboard Room</h2>
+        <input type="text" id="username-input" placeholder="Enter your name..." autocomplete="off">
+        <input type="text" id="room-input" placeholder="Enter Room ID (e.g., room1)..." autocomplete="off">
+        <button id="join-btn">Start Drawing</button>
+    </div>
+</div>
+
+<!-- Main Layout -->
+<div class="app-container">
+    <aside class="sidebar">
+        <h3>Tools</h3>
+        <div class="tool-group">
+            <label>Color:</label>
+            <input type="color" id="color-picker" value="#000000">
+        </div>
+        <div class="tool-group">
+            <label>Brush Size: <span id="size-val">5</span>px</label>
+            <input type="range" id="size-picker" min="1" max="50" value="5">
+        </div>
+        <div class="tool-group">
+            <button id="undo-btn" class="btn">Undo</button>
+            <button id="eraser-btn" class="btn">Eraser</button>
+            <button id="clear-btn" class="btn danger">Clear Board</button>
+        </div>
+
+        <!-- Network Metrics Widget -->
+        <div class="network-metrics">
+            <h4>Network Info</h4>
+            <p>Status: <span id="conn-status" style="color: orange;">Disconnected</span></p>
+            <p>Latency (RTT): <span id="ping-val">--</span> ms</p>
+        </div>
+
+        <div class="active-users-section">
+            <h4>Active Users</h4>
+            <ul id="users-list"></ul>
+        </div>
+    </aside>
+
+    <main class="canvas-container" id="canvas-wrapper">
+        <canvas id="whiteboard"></canvas>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
